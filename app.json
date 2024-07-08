@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "AstronomyPictureOfTheDay",
-    "scheme":"Astronomy Picture Of The Day",
+    "scheme": "Astronomy Picture Of The Day",
     "slug": "AstronomyPictureOfTheDay",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.anonymous.AstronomyPictureOfTheDay"
     },
     "web": {
       "favicon": "./assets/favicon.png"
