@@ -8,7 +8,7 @@ Astronomy Picture of the Day APOD by nasa
 ## Install Necessary Packages
 ```shell
 npm install
-``'
+```
 
 ## Starting the app
 ```shell
