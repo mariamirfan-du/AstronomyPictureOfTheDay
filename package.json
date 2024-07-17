@@ -9,13 +9,16 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.10.1",
     "axios": "^1.7.2",
     "expo": "^51.0.18",
     "expo-constants": "~16.0.2",
+    "expo-font": "~12.0.9",
     "expo-linking": "~6.3.1",
     "expo-router": "~3.5.18",
+    "expo-splash-screen": "~0.27.5",
     "expo-status-bar": "~1.12.1",
-    "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.74.3",
     "react-native-calendar-picker": "^8.0.4",

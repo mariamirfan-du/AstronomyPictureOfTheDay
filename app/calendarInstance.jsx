@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React , {useState} from 'react'
-import { Link } from 'expo-router'
+import { Link, useRouter } from 'expo-router'
 import { getFormatedDate } from 'react-native-modern-datepicker';
 import { Calendar } from 'react-native-calendars';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-
-const profile = () => {
-
+const CalendarInstance  = ({navigation}) => {
   const today = new Date();
 
   const startDate = getFormatedDate(today.setDate(today.getDate() + 1) , 'YYYY/MM/DD')
@@ -23,53 +21,49 @@ const profile = () => {
     setDate(propDate)
   }
 
+  function onDateSelect(d) {
+    navigation.navigate('APOD', {date: d})
+  }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Calendar</Text>
+      <Text style={styles.title}>Select Date</Text>
           <SafeAreaView>
-
           <Calendar
-          //minimumDate={startDate}
-          style={styles.calendar}
-          theme={{
-             monthTextColor: '#2B2436',
-             textMonthFontSize: 30,
-             textMonthFontWeight: 'bold',
-             arrowColor: '#2B2436',
-             calendarBackground:'white',
-             todayTextColor: '#00adf5',
-             textSectionTitleColor:'purple',
-             textInactiveColor:'purple',
-             textDayFontWeight:'bold',
-             textDisabledColor:'grey',
-             selectedDayBackgroundColor:'#65558F',
-             selectedDayTextColor:'white',
-
-
-
-
-
-
-          }}
-          onMonthChange={() => {}}
-          selected={startDate}
-          onDayPress={day => {
-            setDate(day.dateString);
-          }}
-          markedDates={{
-            [date]: {selected: true, disableTouchEvent: true, selectedDotColor: 'purple'}
-          }}
+            maxDate={new Date().toDateString()}
+            disableAllTouchEventsForDisabledDays={true}
+            style={styles.calendar}
+            theme={{
+              monthTextColor: '#2B2436',
+              textMonthFontSize: 30,
+              textMonthFontWeight: 'bold',
+              arrowColor: '#2B2436',
+              calendarBackground:'#ece6f0',
+              todayTextColor: '#00adf5',
+              textSectionTitleColor:'purple',
+              textInactiveColor:'purple',
+              textDayFontWeight:'bold',
+              textDisabledColor:'grey',
+              selectedDayBackgroundColor:'#65558F',
+              selectedDayTextColor:'white',
+            }}
+            onMonthChange={() => {}}
+            selected={startDate}
+            onDayPress={day => {
+              setDate(day.dateString);
+              onDateSelect(day.dateString);
+            }}
+            markedDates={{
+              [date]: {selected: true, disableTouchEvent: true, selectedDotColor: 'purple'}
+            }}
           />
           </SafeAreaView>
-
-          
     </View>
 
   )
 }
 
-export default profile
+export default CalendarInstance
 
 const styles = StyleSheet.create({
     container: {
@@ -77,12 +71,12 @@ const styles = StyleSheet.create({
       backgroundColor: '#2B2436',
     },
     title:{
-      fontSize: 40,
+      fontSize: 35,
       color: '#99EBDC',
       fontWeight: 'bold',
       alignSelf:'center',
       marginBottom:10,
-      marginTop:10,
+      marginTop:50,
       padding:15,
     },
     text: {
@@ -129,9 +123,5 @@ const styles = StyleSheet.create({
       borderRadius:15,
       padding:35,
       margin:25,
-
-
-
     }
-
 });

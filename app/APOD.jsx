@@ -1,17 +1,19 @@
 import { StyleSheet, Text, View, Image, ActivityIndicator, ScrollView } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link, useRouter } from 'expo-router'
 import { StatusBar } from 'expo-status-bar';
 
-const APOD = () => {
+const APOD = ({navigation, route}) => {
   const [apodData, setApodData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [todaysDate, setTodaysDate] = useState(new Date().toDateString());
+  const [date, setTodaysDate] = useState(route.params.date);
 
   useEffect(() => {
     const fetchApod = async () => {
       try{
-        const response = await axios.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY");
+        console.log(date)
+        const response = await axios.get("https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&date="+date);
         setApodData(response.data);
       } catch (error) {
         console.error(error);
@@ -31,7 +33,7 @@ const APOD = () => {
         <ScrollView style={styles.innerDiv}>
           {apodData ? (
             <>
-              <Text style={styles.dateStyle}>{todaysDate}</Text>
+              <Text style={styles.dateStyle}>{date}</Text>
               <Text style={styles.copyrightStyle}>{apodData.copyright}</Text>
               <Image style={styles.image} source={{ uri: apodData.url }}/>
               <Text style={styles.headingStyle}>{apodData.title}</Text>

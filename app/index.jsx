@@ -1,13 +1,30 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Link , useRouter } from 'expo-router'
+import * as SplashScreen from 'expo-splash-screen'
+import { useFonts } from 'expo-font';
+import { useEffect } from 'react';
 
-export default function App() {
-  const router = useRouter();
+SplashScreen.preventAutoHideAsync();
 
-  const handletap = () =>{
-    router.push('/profile')
-  };
+const App = ({navigation}) => {
+  const [loaded, error] = useFonts({
+    'Trispace': require("../assets/fonts/Trispace-VariableFont_wdth,wght.ttf")
+  })
+
+  function handletap(){
+    navigation.navigate('calendarInstance')
+  }
+
+  useEffect(() => {
+    if(!loaded || !error){
+      SplashScreen.hideAsync();
+    }
+  }, [loaded, error]);
+
+  if(!loaded && !error){
+    return null;
+  }
 
   return (
     <TouchableWithoutFeedback onPress={handletap}>
@@ -37,6 +54,7 @@ const styles = StyleSheet.create({
     color: '#99EBDC',
     fontWeight: 'bold',
     mariginBottom:10,
+    fontFamily: 'Trispace'
   },
   tapText: {
     marginTop:20,
@@ -44,9 +62,10 @@ const styles = StyleSheet.create({
     color: '#99EBDC',
     textAlign:'center',
     bottom: 100,
-    position: 'absolute'
-
-
+    position: 'absolute',
+    fontFamily: 'Trispace'
   },
 
 });
+
+export default App
