@@ -9,7 +9,7 @@ SplashScreen.preventAutoHideAsync();
 
 const App = ({navigation}) => {
   const [loaded, error] = useFonts({
-    'Trispace': require("../assets/fonts/Trispace-VariableFont_wdth,wght.ttf")
+    'Trispace': require("./../assets/fonts/Trispace-VariableFont_wdth,wght.ttf"),
   })
 
   function handletap(){
